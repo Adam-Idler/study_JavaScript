@@ -47,8 +47,6 @@ const getTargetMonth = function() {
     return Math.ceil(mission / accumulatedMonth);
 };
 
-
-
 budgetDay = Math.floor(accumulatedMonth / 30);
 
 const getStatusIncome = function() {
