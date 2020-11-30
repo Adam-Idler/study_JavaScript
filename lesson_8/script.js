@@ -83,10 +83,10 @@ let appData = {
         else if ( (appData.budgetDay >= 0) && (appData.budgetDay < 600) ) return 'К сожалению у вас уровень дохода ниже среднего';
         else return 'Что-то пошло не так';
     },
-    gitInfoDeposit: function() {
+    getInfoDeposit: function() {
         if (appData.deposit) {
-            appData.percentDeposit = checkingString(appData.percentDeposit, 'Какой годовой процент?');
-            appData.moneyDeposit = start(appData.moneyDeposit, 'Какая сумма заложена?');
+            appData.percentDeposit = +start(appData.percentDeposit, 'Какой годовой процент?');
+            appData.moneyDeposit = +start(appData.moneyDeposit, 'Какая сумма заложена?');
         }
     },
     calcSavedMoney: function() {
@@ -97,6 +97,8 @@ let appData = {
 appData.asking();
 appData.getBudget();
 appData.getExpensesMonth();
+appData.getInfoDeposit();
+
 
 console.log('Наша программа включает в себя данные: ');
 for (let key in appData) {
