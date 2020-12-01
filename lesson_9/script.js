@@ -38,7 +38,7 @@ let money,
 
 let calculate = document.getElementById('start'),
     addExpensesPlus = document.getElementsByTagName('button')[0],
-    ExpensesPlus = document.getElementsByTagName('button')[1],
+    expensesPlus = document.getElementsByTagName('button')[1],
     checkBox = document.querySelector('#deposit-check'),
     additionalIncome = document.querySelectorAll('.additional_income-item'),
 
@@ -50,7 +50,7 @@ let calculate = document.getElementById('start'),
     resultIncomePeriod = document.getElementsByClassName('income_period-value'),
     resultTargetMonth = document.getElementsByClassName('target_month-value'),
 
-    SalaryAmount = document.querySelector('.salary-amount'),
+    salaryAmount = document.querySelector('.salary-amount'),
     incomeTitle = document.querySelector('input.income-title'),
     incomeAmount = document.querySelector('input.income-amount'),
     expensesTitle = document.querySelector('input.expenses-title'),
