@@ -95,8 +95,8 @@ let start = document.getElementById('start'),
         }
     },
     reset: function() {
-        for (let i = 1; i < expensesItems.length; i++) expensesItems[i].parentNode.removeChild(expensesItems[i]);
-        for (let i = 1; i < incomeItems.length; i++) incomeItems[i].parentNode.removeChild(incomeItems[i]);
+        for (let i = 1; i < expensesItems.length; i++) expensesItems[i].remove();
+        for (let i = 1; i < incomeItems.length; i++) incomeItems[i].remove();
         expensesPlus.style.display = 'block';
         incomePlus.style.display = 'block';
         inputs = document.querySelectorAll('input[type="text"]');
@@ -106,19 +106,19 @@ let start = document.getElementById('start'),
         });
         cancel.style.display = 'none';
         start.style.display = 'block';
-        
-        appData.budget = 0;
-        appData.budgetDay = 0;
-        appData.budgetMonth =  0;
-        appData.expensesMonth = 0;
-        appData.income = {};
-        appData.incomeMonth = 0;
-        appData.addIncome = [];
-        appData.expenses = {};
-        appData.addExpenses = [];
-        appData.deposit = false;
-        appData.percentDeposit = 0;
-        appData.moneyDeposit = 0;
+
+        this.budget = 0;
+        this.budgetDay = 0;
+        this.budgetMonth =  0;
+        this.expensesMonth = 0;
+        this.income = {};
+        this.incomeMonth = 0;
+        this.addIncome = [];
+        this.expenses = {};
+        this.addExpenses = [];
+        this.deposit = false;
+        this.percentDeposit = 0;
+        this.moneyDeposit = 0;
     },
     checkSalary: function() {
         if (!salaryAmount.value) {
