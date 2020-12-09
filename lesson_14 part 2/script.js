@@ -247,16 +247,16 @@ AppData.prototype.addEventListenerPlaceholder = function() {
 
 AppData.prototype.eventListeners = function() {
     const _this = this;
-    salaryAmount.addEventListener('input',  this.checkSalary);
-    start.addEventListener('click', this.start.bind(this));
-    cancel.addEventListener('click', this.reset.bind(this));
-    expensesPlus.addEventListener('click', this.addExpensesBlock.bind(this));
-    incomePlus.addEventListener('click', this.addIncomeBlock.bind(this));
-    periodSelect.addEventListener('mousemove', this.changeRangeValue);
+    salaryAmount.addEventListener('input',  _this.checkSalary);
+    start.addEventListener('click', _this.start.bind(_this));
+    cancel.addEventListener('click', _this.reset.bind(_this));
+    expensesPlus.addEventListener('click', _this.addExpensesBlock.bind(_this));
+    incomePlus.addEventListener('click', _this.addIncomeBlock.bind(_this));
+    periodSelect.addEventListener('mousemove', _this.changeRangeValue);
     periodSelect.addEventListener('mousemove', function() { 
-    if (salaryAmount.value) resultIncomePeriod.value = this.calcSavedMoney(); 
+    if (salaryAmount.value) resultIncomePeriod.value = _this.calcSavedMoney(); 
     });
-    this.addEventListenerPlaceholder();
+    _this.addEventListenerPlaceholder();
 };
 
 const appData = new AppData();
