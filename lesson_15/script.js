@@ -48,8 +48,6 @@ document.addEventListener('DOMContentLoaded', () => {
             this.budget = +salaryAmount.value;
             if (salaryAmount.value) {
                 this.getExpInc();
-                this.getExpensesMonth();
-                this.getIncomeMonth();
                 this.getBudget();
                 this.getAddExpInc();
                 this.showResult();
@@ -57,6 +55,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 inputText.forEach(function(item) {
                     item.disabled = true;
                 });
+                expensesPlus.disabled = true;
+                incomePlus.disabled = true;
                 start.style.display = 'none';
                 cancel.style.display = 'block';
             }
@@ -71,6 +71,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 item.disabled = false;
                 item.value = '';
             });
+            expensesPlus.disabled = false;
+            incomePlus.disabled = false;
             cancel.style.display = 'none';
             start.style.display = 'block';
             depositCheck.checked = false;
@@ -108,6 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
             resultAdditionalIncome.value = this.addIncome.join(', ');
             resultIncomePeriod.value = this.calcSavedMoney();
             resultTargetMonth.value = this.getTargetMonth();
+            console.log(this);
         }
         addExpIncBlock() {
             btnPlus.forEach((item) => {
@@ -131,18 +134,18 @@ document.addEventListener('DOMContentLoaded', () => {
         getExpInc() {
             const count = item => {
                 const startStr = item.className.split('-')[0],
-                    itemTitle = item.querySelector(`.${startStr}-title`).value,
-                    itemAmount = item.querySelector(`.${startStr}-amount`).value;
+                      itemTitle = item.querySelector(`.${startStr}-title`).value,
+                      itemAmount = item.querySelector(`.${startStr}-amount`).value;
                 if (itemTitle !== '' && itemAmount !== '') {      
                     this[startStr][itemTitle] = itemAmount;
                 }
             };
             incomeItems.forEach(count);
             expensesItems.forEach(count);
-            for (const key in this.income) {
+            for (let key in this.income) {
                 this.incomeMonth += +this.income[key];
             }
-            for (const key in this.expenses) {
+            for (let key in this.expenses) {
                 this.expensesMonth += +this.expenses[key];
             }
         }
@@ -171,16 +174,6 @@ document.addEventListener('DOMContentLoaded', () => {
             };
             additionalIncomeItem.forEach(addItem);
             addItem(additionalExpensesItem);
-        }
-        getExpensesMonth() {
-            for (let key in this.expenses) {
-                this.expensesMonth += +this.expenses[key];
-            }
-        }
-        getIncomeMonth() {
-            for (let key in this.income) {
-                this.incomeMonth += +this.income[key];
-            }
         }
         getBudget() {
             this.budgetMonth = this.budget + this.incomeMonth - this.expensesMonth;
