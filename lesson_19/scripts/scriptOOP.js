@@ -120,4 +120,24 @@ window.addEventListener('DOMContentLoaded', () => {
 
   const popup = new Popup();
   popup.togglePopUp();
+
+  class SmoothScrolling {
+      scrollTo() {
+        const smoothLinks = document.querySelectorAll('a[href^="#"]');
+        for (let item of smoothLinks) {
+            item.addEventListener('click', function (event) {
+                event.preventDefault();
+                const id = item.getAttribute('href');
+        
+                document.querySelector(id).scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            });
+        }
+      }
+  }
+
+  const smoothScrolling = new SmoothScrolling();
+  smoothScrolling.scrollTo();
 });
