@@ -28,6 +28,7 @@ class Todo {
       <div class="todo-buttons">
         <button class="todo-remove"></button>
         <button class="todo-complete"></button>
+        <button class="todo-edit"></button>
       </div>
     `);
 
@@ -49,32 +50,64 @@ class Todo {
       this.render();
     } else alert('Нельзя добавить пустое дело');
   }
-  deleteItem(key) {
-    for (let [keyToDo, value] of this.todoData) {
-      if (keyToDo  === key) {
-        this.todoData.delete(keyToDo);
-        this.render();
+  deleteItem(key, target) {
+    let delAnim;
+    target.style.left = target.offsetLeft;
+    const animateDelete = () => {
+      if (target.style.left.replace('px', '') > -2500) {
+        target.style.left = target.style.left.replace('px', '') - 120 + 'px';
+        delAnim = requestAnimationFrame(animateDelete);
+      } else {
+        cancelAnimationFrame(delAnim);
+
+        for (let [keyToDo, value] of this.todoData) {
+          if (keyToDo  === key) {
+            this.todoData.delete(keyToDo);
+            this.render();
+          }
+        }
       }
-    }
+    };
+    requestAnimationFrame(animateDelete);
   }
-  completedItem(key) {
-    for (let [keyToDo, value] of this.todoData) {
-      if (keyToDo  === key) {
-        if (value.completed === false)
-          value.completed = true;
-        else if (value.completed === true)
-        value.completed = false;
-        this.render();
+  completedItem(key, target) {
+    let complAnim;
+    target.style.left = target.offsetLeft;
+    console.log(target.style.left);
+    const animateComplete = () => {
+      if (target.style.left.replace('px', '') > -2500) {
+        target.style.left = target.style.left.replace('px', '') - 120 + 'px';
+        complAnim = requestAnimationFrame(animateComplete);
+      } else {
+        cancelAnimationFrame(complAnim);
+        for (let [keyToDo, value] of this.todoData) {
+          if (keyToDo  === key) {
+            if (!value.completed)
+              value.completed = true;
+            else if (value.completed)
+              value.completed = false;
+            this.render();
+          }
       }
     }
+    };
+    requestAnimationFrame(animateComplete);
+  }
+  editItem(target) { 
+    target.contentEditable = true;
+    target.focus();
+    target.onblur = function() {
+      target.contentEditable = false;
+    };
   }
   handler() {
     this.todoContainer.addEventListener('click', (event) => {
       event.preventDefault();
-      const target = event.target;
-      let keyOfTarget = target.parentNode.parentNode.key;
-      if (target.matches('.todo-remove')) this.deleteItem(keyOfTarget);
-      else if(target.matches('.todo-complete')) this.completedItem(keyOfTarget);
+      let target = event.target;
+      target = target.closest('.todo-item');
+      if (event.target.matches('.todo-remove')) this.deleteItem(target.key, target);
+      else if (event.target.matches('.todo-complete')) this.completedItem(target.key, target);
+      else if (event.target.matches('.todo-edit')) this.editItem(target);
     });
   }
   generateKey() {
