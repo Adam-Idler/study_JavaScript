@@ -93,11 +93,19 @@ class Todo {
     };
     requestAnimationFrame(animateComplete);
   }
-  editItem(target) { 
+  editItem(key, target) { 
     target.contentEditable = true;
     target.focus();
-    target.onblur = function() {
+    target.onblur = () => {
       target.contentEditable = false;
+      let valOfCompleted = this.todoData.get(key);
+      let editValue = {
+        value: target.textContent.trim(),
+        completed: valOfCompleted.completed,
+        key: key
+      };
+      this.todoData.set(key, editValue);
+      this.render();
     };
   }
   handler() {
@@ -107,7 +115,7 @@ class Todo {
       target = target.closest('.todo-item');
       if (event.target.matches('.todo-remove')) this.deleteItem(target.key, target);
       else if (event.target.matches('.todo-complete')) this.completedItem(target.key, target);
-      else if (event.target.matches('.todo-edit')) this.editItem(target);
+      else if (event.target.matches('.todo-edit')) this.editItem(target.key, target);
     });
   }
   generateKey() {
