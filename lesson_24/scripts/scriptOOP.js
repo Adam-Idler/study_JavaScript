@@ -328,7 +328,7 @@ window.addEventListener('DOMContentLoaded', () => {
         }
 
         if (typeValue && squareValue) {
-          total = Math.ceil(this.price * typeValue * squareValue * countValue);
+          total = Math.ceil(this.price * typeValue * squareValue * countValue * dayValue);
         }
         let count = +totalValue.textContent;
         let setID;
