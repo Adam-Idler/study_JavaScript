@@ -283,7 +283,7 @@ window.addEventListener('DOMContentLoaded', () => {
   
   const changePhoto = new ChangePhoto();
   changePhoto.photoChange();
-  
+
   // Валидация форм 
   class Validate {
     constructor() {
@@ -425,7 +425,6 @@ window.addEventListener('DOMContentLoaded', () => {
       this.forms.forEach( (form) => {
         form.addEventListener('submit', (event) => {
           event.preventDefault();    
-          form.reset();
           form.appendChild(statusMessage);
           statusMessage.textContent = this.loadMessage;
           const formData = new FormData(form);
@@ -439,6 +438,7 @@ window.addEventListener('DOMContentLoaded', () => {
             statusMessage.textContent = this.errorMessage;
             console.error(error);
           });
+          form.reset();
       });
       });
     }
