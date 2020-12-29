@@ -22,12 +22,12 @@ function maskPhone(selector, masked = '+7 (___) ___-__-__') {
 		if (!reg.test(this.value) || this.value.length < 5 || keyCode > 47 && keyCode < 58) {
 			this.value = newValue;
 		}
-		if (event.type == "blur" && this.value.length < 5) {
+		if (event.type == "blur" && this.value.length < 8) {
 			this.value = "";
 		}
 
 	}
-
+	console.log(1);
 	for (const elem of elems) {
 		elem.addEventListener("input", mask);
 		elem.addEventListener("focus", mask);

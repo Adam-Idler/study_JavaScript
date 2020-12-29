@@ -293,7 +293,9 @@ window.addEventListener('DOMContentLoaded', () => {
     init() {
       this.validateCalc();
       this.validateInputText();
-      maskPhone('.form-phone');
+      maskPhone('.form-phone', '____ ___-__-__');
+      document.querySelectorAll('.form-email').forEach((elem) => elem.setAttribute('required', true));
+      document.querySelector('.mess').setAttribute('required', true);
     }
     validateCalc() {
         this.calcBlock.addEventListener('input', (e) => {
@@ -373,7 +375,7 @@ window.addEventListener('DOMContentLoaded', () => {
           }
           
         };
-        setID = setInterval(bruteForceNumbers, 10);
+        setID = setInterval(bruteForceNumbers, 5);
       };
 
       calcBlock.addEventListener('change', (event) => {
